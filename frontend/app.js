@@ -123,7 +123,7 @@ async function generateRealTTS(text, voice_id) {
   status.innerText = '⏳ Generating...';
 
   try {
-    const response = await fetch('https://https://alex-tts-backend.onrender.com/api/tts', {
+    const response = await fetch("https://alex-tts-backend.onrender.com/api/tts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, voice_id })
