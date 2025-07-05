@@ -89,13 +89,43 @@
     </section>
   </main>
 
-  <aside id="profileModal" class="modal">
-    <h2>👤 Profile & Settings</h2>
-    <p>Name: <span id="profileName"></span></p>
-    <p>Email: <span id="profileEmail"></span></p>
-    <p>Characters Used: <span id="charUsed">0</span>/1,000</p>
-    <button onclick="toggleProfile()">Close</button>
-  </aside>
+ <aside id="profileModal" class="modal" style="overflow: auto;">
+  <div>
+    <h2 style="margin-top: 0;">👤 Profile & Settings</h2>
+  </div>
+  <button style="width: 10%; position: absolute; top: 9px; left: 87%;" onclick="toggleProfile()">X</button>
+
+  <!-- Profile Picture Circle -->
+  <div style="text-align: center; margin-bottom: 1rem;">
+    <img id="profileImage" src="logo.png" alt="Profile Picture"
+      style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #007bff;">
+    <br><br>
+    <input type="file" id="uploadImage" accept="image/*" onchange="handleImageUpload()" style="width: 50%;" popovertarget="Add your profile Picture!"/>
+  </div>
+
+  <!-- Editable Name Row -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
+    <strong>Name:</strong>
+    <span id="profileName" style="flex: 1; margin: 0 10px;"></span>
+    <button onclick="editField('name')" title="Edit Name" style="width: 10%;">✏️</button>
+  </div>
+
+  <!-- Editable Email Row -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
+    <strong>Email:</strong>
+    <span id="profileEmail" style="flex: 1; margin: 0 10px;"></span>
+    <button onclick="editField('email')" title="Edit Email" style="width: 10%;">✏️</button>
+  </div>
+
+  <!-- Character usage -->
+  <p style="text-align: center;">Character Used: <span id="charUsed">0</span>/1,000</p>
+
+  <!-- Close -->
+  <div style="text-align: center;">
+    <button onclick="toggleProfile()" style="padding: 10px 20px; border: none; background: #007bff; color: white; border-radius: 8px;">Close</button>
+  </div>
+</aside>
+
 
   <div id="subscriptionModal" class="modal">
     <h2>🚫 Limit Reached</h2>

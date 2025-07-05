@@ -114,6 +114,7 @@ ul#historyList li {
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
+  height: 90vh;
   max-width: 450px;
   background: #fff;
   border-radius: 12px;
@@ -121,6 +122,13 @@ ul#historyList li {
   z-index: 1000;
   display: none;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 460px) {
+  .modal{
+    height: 70vh;
+  }
 }
 
 .modal.show {
@@ -184,3 +192,4 @@ body.dark-mode textarea {
     margin: 0 0.3rem;
   }
 }
+
