@@ -1,30 +1,163 @@
-</html><!-- signup.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - Alex - TTS App</title>
-  <link rel="stylesheet" href="style.css">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shotcut icon" href="logo.png">
+  <title>Sign Up - Alex TTS App</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 2rem;
+    }
+    header, footer {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label, input {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    input {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 0.7rem;
+      width: 100%;
+      background: #007bff;
+      color: white;
+      border: none;
+      margin-top: 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 4px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+    .success {
+      color: green;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Join Alex Text to Speech Portal</h1>
-    <nav>
-      <a href="index.html">Login</a>
-      <a href="signup.html">Sign Up</a>
-    </nav>
-  </header>  <main class="form-container">
+    <h1>Join Alex TTS Portal</h1>
+  </header>
+  <main>
     <form id="signupForm">
-      <h2>Create an Account</h2>
-      <label>Full Name:</label>
-      <input type="text" id="signupName" placeholder="Enter your name" required>
-      <label>Email Address:</label>
-      <input type="email" id="signupEmail" placeholder="Enter your email" required>
-      <label>Create Password:</label>
-      <input type="password" id="signupPassword" placeholder="Choose a password" required>
+      <h2>Create Account</h2>
+
+      <label>First Name:</label>
+      <input type="text" id="firstName" required placeholder="e.g., John" />
+
+      <label>Last Name:</label>
+      <input type="text" id="lastName" required placeholder="e.g., Doe" />
+
+      <label>Username:</label>
+      <input type="text" id="username" required placeholder="Minimum 4 characters" />
+
+      <label>Email:</label>
+      <input type="email" id="email" required placeholder="e.g., example@mail.com" />
+
+      <label>Password:</label>
+      <input type="password" id="password" required />
+      <div id="passwordHelp" class="error"></div>
+
+      <label>Confirm Password:</label>
+      <input type="password" id="confirmPassword" required />
+      <div id="confirmHelp" class="error"></div>
+
       <button type="submit">Register</button>
-      <p>Already registered? <a href="index.html">Login here</a></p>
     </form>
-  </main>  <footer>
-    <p>&copy; 2025 Alex-TTS App. All rights reserved.</p>
-  </footer>  <script src="script.js"></script></body>
+    <p style="margin-top:1rem">Already have an account? <a href="index.html">Login here</a></p>
+  </main>
+  <footer>
+    <p>&copy; 2025 Alex TTS App. Powered by M-TECH COMPUTER COLLEGE</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const passwordHelp = document.getElementById('passwordHelp');
+    const confirmHelp = document.getElementById('confirmHelp');
+
+    const nameRegex = /^[A-Za-z]{2,}$/;
+    const usernameRegex = /^[a-zA-Z0-9_]{4,20}$/;
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    function checkPasswordStrength(pwd) {
+      const strong = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      if (!strong.test(pwd)) {
+        passwordHelp.innerText =
+          "Password must be 8+ characters, include uppercase, lowercase, number & special character.";
+        return false;
+      }
+      passwordHelp.innerText = "";
+      return true;
+    }
+
+    function validateForm() {
+      const fname = document.getElementById('firstName').value.trim();
+      const lname = document.getElementById('lastName').value.trim();
+      const uname = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (!nameRegex.test(fname) || !nameRegex.test(lname)) {
+        alert("First and Last name should be at least 2 letters and only alphabets.");
+        return false;
+      }
+
+      if (!usernameRegex.test(uname)) {
+        alert("Username must be 4-20 characters (letters, numbers or underscore).");
+        return false;
+      }
+
+      if (!emailRegex.test(email)) {
+        alert("Invalid email address.");
+        return false;
+      }
+
+      if (!checkPasswordStrength(pass)) return false;
+
+      if (pass !== confirm) {
+        confirmHelp.innerText = "Passwords do not match!";
+        return false;
+      }
+      confirmHelp.innerText = "";
+      return true;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (validateForm()) {
+        // Save to localStorage or send to server
+        const user = {
+          name: `${document.getElementById('firstName').value.trim()} ${document.getElementById('lastName').value.trim()}`,
+          email: document.getElementById('email').value.trim(),
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        alert("✅ Account created!");
+        location.href = 'home.html';
+      }
+    });
+  </script>
+</body>
+</html>

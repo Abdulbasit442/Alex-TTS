@@ -1,363 +1,117 @@
-<!-- home.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alex-TTS Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shotcut icon" href="logo.png">
   <script src="https://js.paystack.co/v1/inline.js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 1rem;
-      background: #f4f4f4;
-    }
-    header, footer {
-      background: #007bff;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav a, nav button {
-      margin: 0 0.5rem;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .dashboard section {
-      margin: 2rem 0;
-    }
-    .welcome{
-        width: 100%;
-    }
-    textarea, select, button {
-      width: 100%;
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      font-size: 1rem;
-    }
-    audio {
-      width: 100%;
-      margin-top: 1rem;
-    }
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: white;
-      padding: 2rem;
-      border: 1px solid #ccc;
-      z-index: 1000;
-      display: none;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      width: 70%;
-      height: 75vh;
-      text-align: center;
-      padding-top: 100px;
-      font-size: 1.7rem;
-      overflow-y: auto;
-    }
-    .modal.show {
-      display: block;
-    }
-    .dark-mode {
-      background-color: #111;
-      color: #eee;
-    }
-
-    .dark-mode .modal{
-      background-color: #111;
-      color: #eee;
-    }
-    .dark-mode header, .dark-mode footer {
-      background: #000000;
-      color: #ffffff;
-    }
-    .dark-mode .welcome, .dark-mode .tts-tool, .dark-mode .history, .dark-mode .tips {
-      background: #000000;
-      color: #ffffff;
-    }
-    .premium-badge {
-      background: gold;
-      color: black;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      margin-left: 0.5rem;
-    }
-  </style>
 </head>
 <body>
   <header>
-    <h1>Alex-TTS Dashboard <span id="premiumBadge"></span></h1>
+    <h1>Alex-TTS <span id="premiumBadge"></span></h1>
     <nav>
       <a href="#" class="active">Home</a>
       <a href="#" onclick="toggleProfile()">Profile</a>
       <a href="#" onclick="logout()">Logout</a>
-      <button onclick="toggleDarkMode()" style="width: 10%;">🌙</button>
+      <button onclick="toggleDarkMode()">🌙</button>
     </nav>
-  </header>  <main class="dashboard">
+  </header>
+
+  <main>
     <section class="welcome">
       <h2>Hello, <span id="welcomeUser">User</span> 👋</h2>
-      <p>Start generating realistic voice messages below with any type of celebrity you want.</p>
+      <p>Generate realistic celebrity voice messages below.</p>
     </section>
-<section class="tts-tool">
-  <textarea id="ttsInput" rows="5" placeholder="Type your text here..."></textarea>
-  <label for="voiceSelect">Choose Voice:</label>
-  <select id="voiceSelect">
-  <option value="TM:default">Default Voice</option>
-  <optgroup label="Male Celebrity Voices">
-    <option value="TM:drake">Drake</option>
-    <option value="TM:kanye">Kanye West</option>
-    <option value="TM:obama">Barack Obama</option>
-    <option value="TM:mrbeast">MrBeast</option>
-    <option value="TM:elon">Elon Musk</option>
-    <option value="TM:trump">Donald Trump</option>
-    <option value="TM:freeman">Morgan Freeman</option>
-    <option value="TM:biden">Joe Biden</option>
-    <option value="TM:tate">Andrew Tate</option>
-    <option value="TM:rock">Dwayne Johnson</option>
-  </optgroup>
-  <optgroup label="Female Celebrity Voices">
-    <option value="TM:adele">Adele</option>
-    <option value="TM:taylor">Taylor Swift</option>
-    <option value="TM:beyonce">Beyoncé</option>
-    <option value="TM:cardi">Cardi B</option>
-    <option value="TM:nicki">Nicki Minaj</option>
-    <option value="TM:rihanna">Rihanna</option>
-    <option value="TM:angelina">Angelina Jolie</option>
-    <option value="TM:emma">Emma Watson</option>
-    <option value="TM:queen">Queen Elizabeth</option>
-    <option value="TM:oprah">Oprah Winfrey</option>
-  </optgroup>
-</select>
-    </optgroup>
-  </select>
-  <button onclick="previewVoice()">🔊 Preview</button>
-  <button onclick="generateSpeech()">🎙️ Generate</button>
-  <p id="statusMessage"></p>
-  <audio id="audioPlayer" controls></audio>
 
-  <div id="shareButtons" style="display:none;">
-    <a id="downloadBtn" href="#" download="Alex-tts.mp3">⬇️ Download</a>
-    <a id="whatsappShare" target="_blank">WhatsApp</a>
-    <a id="facebookShare" target="_blank">Facebook</a>
-    <a id="zangiShare" target="_blank">Zangi</a>
-    <a id="snapchatShare" target="_blank">Snapchat</a>
-    <a id="tiktokShare" target="_blank">TikTok</a>
-  </div>
-</section>
+    <section class="tts-tool">
+      <textarea id="ttsInput" rows="5" placeholder="Type your text here..."></textarea>
 
-<section class="history">
-  <h3>🕒 History</h3>
-  <ul id="historyList"></ul>
-</section>
+      <label for="voiceSelect">Choose Voice:</label>
+      <select id="voiceSelect">
+        <option value="TM:default">Default Voice</option>
+        <optgroup label="Male Celebrity Voices">
+          <option value="TM:drake">Drake</option>
+          <option value="TM:kanye">Kanye West</option>
+          <option value="TM:obama">Barack Obama</option>
+          <option value="TM:mrbeast">MrBeast</option>
+          <option value="TM:elon">Elon Musk</option>
+          <option value="TM:trump">Donald Trump</option>
+          <option value="TM:freeman">Morgan Freeman</option>
+          <option value="TM:biden">Joe Biden</option>
+          <option value="TM:tate">Andrew Tate</option>
+          <option value="TM:rock">Dwayne Johnson</option>
+        </optgroup>
+        <optgroup label="Female Celebrity Voices">
+          <option value="TM:adele">Adele</option>
+          <option value="TM:taylor">Taylor Swift</option>
+          <option value="TM:beyonce">Beyoncé</option>
+          <option value="TM:cardi">Cardi B</option>
+          <option value="TM:nicki">Nicki Minaj</option>
+          <option value="TM:rihanna">Rihanna</option>
+          <option value="TM:angelina">Angelina Jolie</option>
+          <option value="TM:emma">Emma Watson</option>
+          <option value="TM:queen">Queen Elizabeth</option>
+          <option value="TM:oprah">Oprah Winfrey</option>
+        </optgroup>
+      </select>
 
-<section class="tips">
-  <h3>💡 Tips</h3>
-  <ul>
-    <li>Use punctuation for realistic flow.</li>
-    <li>Keep sentences clear and short.</li>
-  </ul>
-</section>
+      <div class="buttons">
+        <button onclick="previewVoice()">🔊 Preview</button>
+        <button onclick="generateSpeech()">🎙️ Generate</button>
+      </div>
+      <p id="statusMessage"></p>
+      <audio id="audioPlayer" controls></audio>
 
-  </main>  <aside id="profileModal" class="modal">
+      <div id="shareButtons" style="display:none;">
+          <a id="downloadBtn" href="#" download="Alex-tts.mp3">⬇️ Download</a>
+          <a id="whatsappShare" target="_blank">WhatsApp</a>
+          <a id="facebookShare" target="_blank">Facebook</a>
+          <a id="zangiShare" target="_blank">Zangi</a>
+          <a id="snapchatShare" target="_blank">Snapchat</a>
+          <a id="tiktokShare" target="_blank">TikTok</a>
+      </div>
+
+    </section>
+
+    <section class="history">
+      <h3>🕒 History</h3>
+      <ul id="historyList"></ul>
+    </section>
+
+    <section class="tips">
+      <h3>💡 Tips</h3>
+      <ul>
+        <li>Use punctuation for better flow.</li>
+        <li>Keep sentences short and clear.</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside id="profileModal" class="modal">
     <h2>👤 Profile & Settings</h2>
     <p>Name: <span id="profileName"></span></p>
     <p>Email: <span id="profileEmail"></span></p>
-    <p>Character Used: <span id="charUsed">0</span>/1,000</p>
+    <p>Characters Used: <span id="charUsed">0</span>/1,000</p>
     <button onclick="toggleProfile()">Close</button>
-  </aside>  <div id="subscriptionModal" class="modal">
-    <h2>🚫 Free Trial Limit Reached</h2>
-    <p>You’ve used your 1,000 free characters.</p>
-    <p>Choose a subscription to continue:</p>
-    <button onclick="subscribePlan('weekly')">Subscribe Weekly - ₦8,000</button>
-<button onclick="payMonthly()">Subscribe Monthly - ₦32,000</button>
-<button onclick="payYearly()">Subscribe Yearly - ₦240,000</button>
+  </aside>
 
-<p id="status"></p>
-    <br><br>
+  <div id="subscriptionModal" class="modal">
+    <h2>🚫 Limit Reached</h2>
+    <p>You have used your 1,000 free characters.</p>
+    <p>Subscribe to continue:</p>
+    <button onclick="subscribePlan('weekly')">Weekly - ₦8,000</button>
+    <button onclick="subscribePlan('monthly')">Monthly - ₦32,000</button>
+    <button onclick="subscribePlan('yearly')">Yearly - ₦240,000</button>
+    <p id="status"></p>
     <button onclick="closeModal('subscriptionModal')">Close</button>
-  </div>  <footer>
-    <p>&copy; 2025 Alex-TTS App. Powered by M-TECH COMPUTER COLLEGE.</p>
-  </footer> 
-   <script>
-   const user = JSON.parse(localStorage.getItem('user'));
-if (!user) location.href = 'index.html';
+  </div>
 
-// 🔑 Unique localStorage keys per user
-const charKey = `charUsed_${user.email}`;
-const premiumKey = `isPremium_${user.email}`;
-const expiryKey = `expiry_${user.email}`;
-const planKey = `plan_${user.email}`;
+  <footer>
+    <p>&copy; 2025 Alex-TTS. Powered by M-TECH COMPUTER COLLEGE.</p>
+  </footer>
 
-let charUsed = parseInt(localStorage.getItem(charKey)) || 0;
-
-const premiumBadge = document.getElementById('premiumBadge');
-const welcomeUser = document.getElementById('welcomeUser');
-const profileName = document.getElementById('profileName');
-const profileEmail = document.getElementById('profileEmail');
-const charUsedDisplay = document.getElementById('charUsed');
-const statusDisplay = document.getElementById('statusMessage');
-
-// ✅ Subscription check per user
-function isSubscribed() {
-  const expiry = localStorage.getItem(expiryKey);
-  return expiry && new Date() < new Date(expiry);
-}
-
-function getRemainingDays() {
-  const expiry = localStorage.getItem(expiryKey);
-  if (!expiry) return 0;
-  const now = new Date();
-  const end = new Date(expiry);
-  return Math.max(0, Math.ceil((end - now) / (1000 * 60 * 60 * 24)));
-}
-
-const isPremium = isSubscribed();
-if (isPremium) {
-  premiumBadge.innerHTML = '<span class="premium-badge">PREMIUM</span>';
-}
-
-// 🧑 Display user info
-welcomeUser.innerText = user.name || user.email;
-profileName.innerText = user.name || 'Anonymous';
-profileEmail.innerText = user.email;
-charUsedDisplay.innerText = isPremium ? `Unlimited (${getRemainingDays()}d left)` : charUsed;
-
-// 👋 Logout
-function logout() {
-  localStorage.removeItem('user');
-  location.href = 'index.html';
-}
-
-// 🎧 Preview Voice (static link or sample per voice)
-function previewVoice() {
-  const voice = document.getElementById('voiceSelect').value;
-  const audio = document.getElementById('audioPlayer');
-  audio.src = `/samples/${voice}.mp3`; // Optional: use static previews
-  audio.play();
-  statusDisplay.innerText = '▶️ Previewing...';
-}
-
-// 🗣️ Generate speech (with real TTS backend)
-function generateSpeech() {
-  const text = document.getElementById('ttsInput').value;
-  const voiceId = document.getElementById('voiceSelect').value;
-  const length = text.length;
-
-  const maxChars = 1000;
-  if (!isPremium && charUsed + length > maxChars) {
-    document.getElementById('subscriptionModal').classList.add('show');
-    return;
-  }
-
-  charUsed += length;
-  localStorage.setItem(charKey, charUsed);
-  charUsedDisplay.innerText = isPremium ? `Unlimited (${getRemainingDays()}d left)` : charUsed;
-
-  generateRealTTS(text, voiceId);
-}
-
-// 🎙️ Connect to backend ElevenLabs TTS
-async function generateRealTTS(text, voice_id) {
-  const status = document.getElementById('statusMessage');
-  const audio = document.getElementById('audioPlayer');
-
-  status.innerText = '⏳ Generating...';
-
-  try {
-    const response = await fetch("http://localhost:5000/api/tts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, voice_id })
-    });
-
-    if (!response.ok) throw new Error('Failed to fetch audio');
-
-    const blob = await response.blob();
-    const audioURL = URL.createObjectURL(blob);
-
-    audio.src = audioURL;
-    audio.play();
-
-    // Enable share + download
-    document.getElementById('downloadBtn').href = audioURL;
-    document.getElementById('whatsappShare').href = `https://wa.me/?text=${audioURL}`;
-    document.getElementById('facebookShare').href = `https://facebook.com/sharer/sharer.php?u=${audioURL}`;
-    document.getElementById('zangiShare').href = `https://zangi.com/share?url=${audioURL}`;
-    document.getElementById('snapchatShare').href = `https://snapchat.com/scan?url=${audioURL}`;
-    document.getElementById('tiktokShare').href = `https://tiktok.com/upload?url=${audioURL}`;
-    document.getElementById('shareButtons').style.display = 'block';
-
-    status.innerText = '✅ Voice Ready!';
-    saveToHistory(text, audioURL);
-  } catch (err) {
-    console.error(err);
-    status.innerText = '❌ Failed to generate voice.';
-  }
-}
-
-// 📝 Save to audio history
-function saveToHistory(text, url) {
-  const li = document.createElement('li');
-  li.innerHTML = `${text.slice(0, 50)}... <a href="${url}" target="_blank">Play</a>`;
-  document.getElementById('historyList').prepend(li);
-}
-
-// 👤 Profile
-function toggleProfile() {
-  document.getElementById('profileModal').classList.toggle('show');
-}
-
-// 🌙 Dark Mode
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-}
-
-// ❌ Modal close
-function closeModal(id) {
-  document.getElementById(id).classList.remove('show');
-}
-
-// 🪙 Subscription setup
-function setSubscription(plan, days) {
-  const expiry = new Date();
-  expiry.setDate(expiry.getDate() + days);
-  localStorage.setItem(premiumKey, 'true');
-  localStorage.setItem(planKey, plan);
-  localStorage.setItem(expiryKey, expiry.toISOString());
-}
-
-// 💰 Paystack setup
-function subscribePlan(plan) {
-  let amount, days;
-
-  if (plan === 'weekly') {
-    amount = 850000; days = 7;
-  } else if (plan === 'monthly') {
-    amount = 3500000; days = 30;
-  } else if (plan === 'yearly') {
-    amount = 23500000; days = 365;
-  } else {
-    alert("Invalid plan"); return;
-  }
-
-  PaystackPop.setup({
-    key: 'pk_test_ddcc9efeee30993f4d2493859369c9c4b1dec86b',
-    email: user.email,
-    amount: amount,
-    currency: 'NGN',
-    ref: 'SUB_' + Math.floor(Math.random() * 1000000000),
-    callback: function () {
-      setSubscription(plan, days);
-      alert("✅ Subscription Successful!");
-      location.reload();
-    },
-    onClose: function () {
-      alert("❌ Payment cancelled.");
-    }
-  }).openIframe();
-}
-  </script></body>
+  <script src="app.js"></script>
+</body>
 </html>
